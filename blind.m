@@ -78,7 +78,7 @@ for k = 1:numel(old_names)
     else
       movefile(old_name, new_name);
     end;
-    if exist(new_name) ~= 2
+    if exist(new_name, 'file') ~= 2
       disp(strcat('Renaming "', old_name, '" to "', new_name, '" failed. Aborting.'));
       quit;
     end;

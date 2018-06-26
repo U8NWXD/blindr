@@ -70,7 +70,7 @@ for k = 1:numel(original_names)
     else
       movefile(blind, origi);
     end;
-    if exist(origi) ~= 2
+    if exist(origi, 'file') ~= 2
       disp(strcat('Renaming "', blind, '" to "', origi, '" failed. Aborting.'));
       quit;
     end;
@@ -93,7 +93,7 @@ for k = 1:numel(original_names)
         else
           movefile(log, unBlindLog);
         end;
-        if exist(unBlindLog) ~= 2
+        if exist(unBlindLog, 'file') ~= 2
           disp(strcat('Renaming "', log, '" to "', unBlindLog, '" failed. Aborting.'));
           quit;
         end;
