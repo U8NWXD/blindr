@@ -37,7 +37,7 @@ end;
 % Check that there is a key file present
 if exist(KEY, 'file') ~= 2
   disp('No key file found. Aborting.');
-  quit;
+  return;
 end;
 
 % Read in blinding key from key file
@@ -61,7 +61,7 @@ for k = 1:numel(original_names)
   elseif exist(origi, 'file') == 2
     disp(strcat('The file "', origi, '" already exists. Aborting.'))
     all
-    quit;
+    return;
   else
     if USE_JAVA
       old = java.io.File(blind);
@@ -72,7 +72,7 @@ for k = 1:numel(original_names)
     end;
     if exist(origi, 'file') ~= 2
       disp(strcat('Renaming "', blind, '" to "', origi, '" failed. Aborting.'));
-      quit;
+      return;
     end;
   end;
 
@@ -95,7 +95,7 @@ for k = 1:numel(original_names)
         end;
         if exist(unBlindLog, 'file') ~= 2
           disp(strcat('Renaming "', log, '" to "', unBlindLog, '" failed. Aborting.'));
-          quit;
+          return;
         end;
       end;
     end;

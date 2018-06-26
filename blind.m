@@ -32,7 +32,7 @@ end;
 % Check that there is no key file present
 if exist('blindingKey.csv', 'file') == 2
   disp('A blindingKey.csv file already exists. Aborting.');
-  quit;
+  return;
 end;
 
 % Read Existing Filenames and Compute Blinded Names
@@ -54,7 +54,7 @@ for k = 1:numel(new_names)
   new_name = strcat(int2str(new_names{k}), '.', EXTENSION);
   if exist(new_name, 'file') == 2
     disp(strcat('The file "', new_name, '" already exists. Aborting.'))
-    quit;
+    return;
   end;
 end;
 
@@ -66,10 +66,10 @@ for k = 1:numel(old_names)
 
   if exist(old_name, 'file') ~= 2
     disp(strcat('The file "', old_name, '" appears to have disappeared. Aborting.'))
-    quit;
+    return;
   elseif exist(new_name, 'file') == 2
     disp(strcat('The file "', new_name, '" already exists. Aborting.'))
-    quit;
+    return;
   else
     if USE_JAVA
       old = java.io.File(old_name);
@@ -80,7 +80,7 @@ for k = 1:numel(old_names)
     end;
     if exist(new_name, 'file') ~= 2
       disp(strcat('Renaming "', old_name, '" to "', new_name, '" failed. Aborting.'));
-      quit;
+      return;
     end;
   end;
 end;
