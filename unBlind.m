@@ -26,6 +26,7 @@ KEY = 'blindingKey.csv';    % Filename of key file
 % Must be a cell array of strings with all column indices = 1
 % and row indices 1 ... N for N suffixes
 LOG_SUFFIXES = [cellstr('_CS.txt'); cellstr('_CS')];
+LOG_PREFIX = 'log';
 USE_JAVA = ispc;          % Whether or not to use Java for renaming files
 
 % Import Statements
@@ -35,7 +36,7 @@ end;
 
 % Read in blinding key from key file
 file = fopen(KEY);
-all = textscan(file, '%s %s', 'Delimiter', ', ');
+all = textscan(file, '%s %s', 'Delimiter', ',');
 fclose(file);
 
 % Extract original and blinded names from blinding key
@@ -68,7 +69,7 @@ for k = 1:numel(original_names)
   % Unblind any log files found
   for i = 1:numel(LOG_SUFFIXES)
     suffix = LOG_SUFFIXES{i,1};
-    log = strcat(blind, suffix);
+    log = strcat(LOG_PREFIX, blind, suffix);
     unBlindLog = strcat(origi, suffix);
     if exist(log, 'file') == 2
       disp(strcat('Renaming "', log, '" to "', unBlindLog, '"'))
