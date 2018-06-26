@@ -1,4 +1,4 @@
-% autoBlindr: A program for reversibly randomizing filenames
+% blindr: A program for reversibly randomizing filenames
 % Copyright (C) 2018  U8N WXD
 
 % This program is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@
 % You should have received a copy of the GNU Affero General Public License
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-disp('autoBlindr  Copyright (C) 2018  U8N WXD')
+disp('blindr  Copyright (C) 2018  U8N WXD')
 disp('This program comes with ABSOLUTELY NO WARRANTY.')
 disp('This is free software, and you are welcome to redistribute it')
 disp('under certain conditions.')
