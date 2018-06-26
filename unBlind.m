@@ -35,12 +35,12 @@ for k = 1:numel(original_names)
   blind = blinded_names{k, 1};
   origi = original_names{k, 1};
 
-  disp('Renaming "', blind, '" to "', origi, '"')
+  disp(strcat('Renaming "', blind, '" to "', origi, '"'))
 
   if exist(blind, 'file') ~= 2
-    disp('The file "', blind, '" is missing. Skipping.')
+    disp(strcat('The file "', blind, '" is missing. Skipping.'))
   elseif exist(origi, 'file') == 2
-    disp('The file "', origi, '" already exists. Aborting.')
+    disp(strcat('The file "', origi, '" already exists. Aborting.'))
     all
     quit;
   else
@@ -53,9 +53,9 @@ for k = 1:numel(original_names)
     log = strcat(blind, suffix);
     unBlindLog = strcat(origi, suffix);
     if exist(log, 'file') == 2
-      disp('Renaming "', log, '" to "', unBlindLog, '"')
+      disp(strcat('Renaming "', log, '" to "', unBlindLog, '"'))
       if exist(unBlindLog, 'file') == 2
-        disp('The file "', unBlindLog, '" already exists. Skipping.')
+        disp(strcat('The file "', unBlindLog, '" already exists. Skipping.'))
       else
         movefile(log, unBlindLog);
       end;
