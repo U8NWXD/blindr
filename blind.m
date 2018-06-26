@@ -22,6 +22,12 @@ disp('')
 
 % Constants
 EXTENSION = 'avi';
+USE_JAVA = ispc;
+
+% Import Statements
+if USE_JAVA
+  import java.io.File;
+end;
 
 % Read Existing Filenames and Compute Blinded Names
 directory  = dir(strcat('*.', EXTENSION));
@@ -59,6 +65,12 @@ for k = 1:numel(old_names)
     disp(strcat('The file "', new_name, '" already exists. Aborting.'))
     quit;
   else
-    movefile(old_name, new_name);
+    if USE_JAVA
+      old = java.io.File(old_name);
+      new = java.io.File(new_name);
+      old.renameTo(new);
+    else
+      movefile(old_name, new_name);
+    end;
   end;
 end;

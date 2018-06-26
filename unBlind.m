@@ -26,6 +26,12 @@ KEY = 'blindingKey.csv';    % Filename of key file
 % Must be a cell array of strings with all column indices = 1
 % and row indices 1 ... N for N suffixes
 LOG_SUFFIXES = [cellstr('_CS.txt'); cellstr('_CS')];
+USE_JAVA = ispc;          % Whether or not to use Java for renaming files
+
+% Import Statements
+if USE_JAVA
+  import java.io.File;
+end;
 
 % Read in blinding key from key file
 file = fopen(KEY);
@@ -50,7 +56,13 @@ for k = 1:numel(original_names)
     all
     quit;
   else
-    movefile(blind, origi);
+    if USE_JAVA
+      old = java.io.File(blind);
+      new = java.io.File(origi);
+      old.renameTo(new);
+    else
+      movefile(blind, origi);
+    end;
   end;
 
   % Unblind any log files found
@@ -63,7 +75,13 @@ for k = 1:numel(original_names)
       if exist(unBlindLog, 'file') == 2
         disp(strcat('The file "', unBlindLog, '" already exists. Skipping.'))
       else
-        movefile(log, unBlindLog);
+        if USE_JAVA
+          old = java.io.File(log);
+          new = java.io.File(unBlindLog);
+          old.renameTo(new);
+        else
+          movefile(log, unBlindLog);
+        end;
       end;
     end;
   end;
