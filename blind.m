@@ -29,6 +29,12 @@ if USE_JAVA
   import java.io.File;
 end;
 
+% Check that there is no key file present
+if exist('blindingKey.csv', 'file') == 2
+  disp('A blindingKey.csv file already exists. Aborting.');
+  quit;
+end;
+
 % Read Existing Filenames and Compute Blinded Names
 directory  = dir(strcat('*.', EXTENSION));
 old_names = {directory.name};
