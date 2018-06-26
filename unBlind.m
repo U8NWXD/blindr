@@ -34,6 +34,12 @@ if USE_JAVA
   import java.io.File;
 end;
 
+% Check that there is a key file present
+if exist(KEY, 'file') ~= 2
+  disp('No key file found. Aborting.');
+  quit;
+end;
+
 % Read in blinding key from key file
 file = fopen(KEY);
 all = textscan(file, '%s %s', 'Delimiter', ',');
