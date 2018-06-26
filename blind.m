@@ -41,7 +41,7 @@ fclose(file);
 for k = 1:numel(new_names)
   new_name = strcat(int2str(new_names{k}), '.', EXTENSION);
   if exist(new_name, 'file') == 2
-    strcat('The file "', new_name, '" already exists. Aborting.')
+    disp('The file "', new_name, '" already exists. Aborting.')
     quit;
   end;
 end;
@@ -50,13 +50,13 @@ end;
 for k = 1:numel(old_names)
   old_name = old_names{k};
   new_name = strcat(int2str(new_names{k}), '.', EXTENSION);
-  strcat('Renaming "', old_name, '" to "', new_name, '"')
+  disp('Renaming "', old_name, '" to "', new_name, '"')
 
   if exist(old_name, 'file') ~= 2
-    strcat('The file "', old_name, '" appears to have disappeared. Aborting.')
+    disp('The file "', old_name, '" appears to have disappeared. Aborting.')
     quit;
   elseif exist(new_name, 'file') == 2
-    strcat('The file "', new_name, '" already exists. Aborting.')
+    disp('The file "', new_name, '" already exists. Aborting.')
     quit;
   else
     movefile(old_name, new_name);
