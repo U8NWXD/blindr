@@ -14,6 +14,12 @@
 % You should have received a copy of the GNU Affero General Public License
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+disp('autoBlindr  Copyright (C) 2018  U8N WXD')
+disp('This program comes with ABSOLUTELY NO WARRANTY.')
+disp('This is free software, and you are welcome to redistribute it')
+disp('under certain conditions.')
+disp('')
+
 % Constants
 KEY = 'blindingKey.csv';    % Filename of key file
 % Potentially appended to end of blinded name to create log name
