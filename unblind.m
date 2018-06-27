@@ -59,9 +59,7 @@ for k = 1:numel(original_names)
   if exist(blind, 'file') ~= 2
     disp(strcat('The file "', blind, '" is missing. Skipping.'))
   elseif exist(origi, 'file') == 2
-    disp(strcat('The file "', origi, '" already exists. Aborting.'))
-    all
-    return;
+    disp(strcat('The file "', origi, '" already exists. Skipping.'))
   else
     if USE_JAVA
       old = java.io.File(blind);
