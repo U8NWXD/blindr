@@ -18,6 +18,7 @@ following warnings in mind whenever using this program.
 * **If you move the blinding key file, create another CSV with the same name to
   prevent accidental blinding.**
 * **NEVER RENAME THE BLINDING KEY FILE!**
+
 In addition, **always test these scripts on a simulation of your production
 environment to make sure it will do what you expect.** Copying a smaller subset
 of the data you intend to blind can make for a good test-run.
