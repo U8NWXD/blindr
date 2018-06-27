@@ -11,6 +11,17 @@ With many data files, however, manually renaming them and keeping track of which
 error-prone. This program automates both blinding and un-blinding files, and it
 includes safeguards against destroying any information in the process.
 
+## Warnings
+This program renames files, so it is possible to use it to hopelessly scramble
+your files. With large sets of data-files, this could be disastrous. Keep the
+following warnings in mind whenever using this program.
+* **If you move the blinding key file, create another CSV with the same name to
+  prevent accidental blinding.**
+* **NEVER RENAME THE BLINDING KEY FILE!**
+In addition, **always test these scripts on a simulation of your production
+environment to make sure it will do what you expect.** Copying a smaller subset
+of the data you intend to blind can make for a good test-run.
+
 ## Compatibility
 
 The scripts are written to be compatible with both MATLAB and Octave, with some
