@@ -21,7 +21,7 @@ disp('under certain conditions.')
 disp('')
 
 % Constants
-EXTENSION = 'avi';
+EXTENSION = 'wmv';
 USE_JAVA = ispc;
 VERSION = 'version.txt';   % Name of version file
 VERSION_CUR = [1 0 0];
@@ -58,7 +58,7 @@ fclose(file);
 key = [transpose(old_names), transpose(new_names)];
 file = fopen('blindingKey.csv', 'w');
 for row = 1:numel(old_names)
-    fprintf(file,'%s, %d.avi\r\n', key{row,:});
+    fprintf(file,strcat('%s, %d.', EXTENSION, '\r\n'), key{row,:});
 end;
 fclose(file);
 
