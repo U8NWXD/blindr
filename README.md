@@ -15,8 +15,7 @@ includes safeguards against destroying any information in the process.
 This program renames files, so it is possible to use it to hopelessly scramble
 your files. With large sets of data-files, this could be disastrous. Keep the
 following warnings in mind whenever using this program.
-* **If you move the blinding key file, create another CSV with the same name to
-  prevent accidental blinding.**
+* **NEVER RENAME OR MOVE THE VERSION FILE!**
 * **NEVER RENAME THE BLINDING KEY FILE!**
 
 In addition, **always test these scripts on a simulation of your production
@@ -45,7 +44,6 @@ This is a potential workflow for the analysis of scientific data.
 * Delete `blind.m`
 * Move the console output file and `blindingKey.csv` to a trusted location
   inaccessible to the researcher who will do the analysis
-* Create a dummy `blindingKey.csv` file to prevent accidental blinding
 * Process the data as you normally would, using the blinded names in place of
   the actual ones. Store results as `log[blinded name]_[initials].txt`
 * Copy `unblind.m` and `blindingKey.csv` back into the directory
@@ -121,10 +119,22 @@ they are only ever applied to that specific file. See the section
 Since `blind.m` refuses to blind a directory that already contains
 `blindingKey.csv`, it will not blind a directory that has just been blinded.
 This helps stop the user from accidentally blinding twice. However, one is
-likely to move `blindingKey.csv` elsewhere. **If you move the blinding key file,
-create another CSV with the same name to prevent accidental blinding.** In
+likely to move `blindingKey.csv` elsewhere. For this reason, `blind.m` also
+creates a `version.txt` file when blinding. It will refuse to blind a directory
+containing such a version file. This file contains only the version of `blindr`
+used to blind, so it can and should be left after blinding. In
 addition, as soon as you finish blinding, delete `blind.m` and `unblind.m` to
 make it harder to accidentally re-blind files.
+
+### Incompatible Versions
+`blindr`'s versions are named using [semantic versioning](https://semver.org/).
+`blind.m` creates a `version.txt` file just before blinding that stores its
+version (comma-separated instead of period-separated so MATLAB doesn't consider
+the separator a decimal point). `unblind.m` checks this version against its own
+for compatibility. If the major version is different or if the found minor
+version is greater than that of `unblind.m` (indicating additional functionality
+has been added since `unblind.m` was written), `unblind.m` will refuse to
+proceed.
 
 ### Partial Blinds From Mid-Execution Failures
 Both `blind.m` and `unblind.m` print to the console status updates with every
