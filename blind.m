@@ -23,10 +23,18 @@ disp('')
 % Constants
 EXTENSION = 'avi';
 USE_JAVA = ispc;
+VERSION = 'version.txt';   % Name of version file
+VERSION_CUR = [1 0 0];
 
 % Import Statements
 if USE_JAVA
   import java.io.File;
+end;
+
+% Check that there is no index file present
+if exist(VERSION, 'file') == 2
+  disp('A version file already exists. Aborting');
+  return;
 end;
 
 % Check that there is no key file present
@@ -41,9 +49,14 @@ old_names = {directory.name};
 new_names = randperm(numel(old_names));
 new_names = num2cell(new_names);
 
+% Create index file for storing versioning information and preventing re-blinding
+file = fopen(VERSION, 'w');
+fprintf(file, '%d,%d,%d' , VERSION_CUR);
+fclose(file);
+
 % Create Key for Unblinding And Save to blindingKey.csv
 key = [transpose(old_names), transpose(new_names)];
-file = fopen('blindingKey.csv', 'w') ;
+file = fopen('blindingKey.csv', 'w');
 for row = 1:numel(old_names)
     fprintf(file,'%s, %d.avi\r\n', key{row,:});
 end;

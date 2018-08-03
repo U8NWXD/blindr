@@ -22,16 +22,48 @@ disp('')
 
 % Constants
 KEY = 'blindingKey.csv';    % Filename of key file
+VERSION = 'version.txt'; % Filename of version file
 % Potentially appended to end of blinded name to create log name
 % Must be a cell array of strings with all column indices = 1
 % and row indices 1 ... N for N suffixes
 LOG_SUFFIXES = [cellstr('_CS.txt'); cellstr('_CS')];
 LOG_PREFIX = 'log';
 USE_JAVA = ispc;          % Whether or not to use Java for renaming files
+VERSION_CUR = [1 0 0];
 
 % Import Statements
 if USE_JAVA
   import java.io.File;
+end;
+
+function f = semantic_compatible(current, file)
+  if current(1) == file(1)
+    if current(2) >= file(2)
+      f = true;
+    else
+      f = false;
+    end
+  else
+    f = false;
+  end
+end
+
+% Check that there is a version file present and that versions are compatible
+if exist(VERSION, 'file') == 2
+  file = fopen(VERSION, 'rt');
+  vers = textscan(file, '%d %d %d', 'Delimiter', ',');
+  found = [vers{1,1} vers{1,2} vers{1,3}];
+  if ~ semantic_compatible(VERSION_CUR, found)
+    disp('Blinding was performed by an unsupported version of blindr. Aborting.');
+    disp('Current Version:');
+    disp(VERSION_CUR);
+    disp('Version that Performed Blinding:')
+    disp(found);
+    return;
+  end;
+else
+  disp('No version file found. Aborting.')
+  return;
 end;
 
 % Check that there is a key file present
