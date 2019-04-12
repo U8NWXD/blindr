@@ -36,24 +36,12 @@ if USE_JAVA
   import java.io.File;
 end;
 
-function f = semantic_compatible(current, file)
-  if current(1) == file(1)
-    if current(2) >= file(2)
-      f = true;
-    else
-      f = false;
-    end
-  else
-    f = false;
-  end
-end
-
 % Check that there is a version file present and that versions are compatible
 if exist(VERSION, 'file') == 2
   file = fopen(VERSION, 'rt');
   vers = textscan(file, '%d %d %d', 'Delimiter', ',');
   found = [vers{1,1} vers{1,2} vers{1,3}];
-  if ~ semantic_compatible(VERSION_CUR, found)
+  if VERSION_CUR(1) ~= found(1) || VERSION_CUR(2) < found(2)
     disp('Blinding was performed by an unsupported version of blindr. Aborting.');
     disp('Current Version:');
     disp(VERSION_CUR);
