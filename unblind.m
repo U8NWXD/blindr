@@ -29,7 +29,7 @@ VERSION = 'version.txt'; % Filename of version file
 LOG_SUFFIXES = [cellstr('_CS.txt'); cellstr('_CS')];
 LOG_PREFIX = 'log';
 USE_JAVA = ispc;          % Whether or not to use Java for renaming files
-VERSION_CUR = [1 0 0];
+VERSION_CUR = [1 0 1];
 
 % Import Statements
 if USE_JAVA

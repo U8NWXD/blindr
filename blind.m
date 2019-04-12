@@ -24,7 +24,7 @@ disp('')
 EXTENSION = 'wmv';
 USE_JAVA = ispc;
 VERSION = 'version.txt';   % Name of version file
-VERSION_CUR = [1 0 0];
+VERSION_CUR = [1 0 1];
 
 % Import Statements
 if USE_JAVA
